@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<body>
+    <h1>This is the Home Page!</h1>
+    <p>Here's What You Can Do:</p>
+    <ul>
+        <li>
+            <h4 id="user-registration">User Registration</h4>
+            <ul>
+                <li>Endpoint: <code>/users/new</code></li>
+                <li>Request type: <code>POST</code></li>
+                <li>Body params:
+                    <ul>
+                        <li><code>username</code></li>
+                        <li><code>role (admin/employee)</code></li>
+                    </ul>
+                </li>
+                <li>Return type: <code>Auth token</code></li>
+            </ul>
+        </li>
+        <li>
+            <h4 id="raising-a-ticket">Raising a Ticket</h4>
+            <ul>
+                <li>Endpoint: <code>/tickets/new</code></li>
+                <li>Request type: <code>POST</code></li>
+                <li>Body Params:
+                    <ul>
+                        <li><code>title</code></li>
+                        <li><code>description</code></li>
+                    </ul>
+                </li>
+                <li>Return type: <code>ticket ID</code></li>
+                <li>Note: <code>ticket can only be raised if the auth token is of an admin</code></li>
+            </ul>
+        </li>
+        <li>
+            <h4 id="get-ticket-details">Get Ticket Details</h4>
+            <ul>
+                <li>Endpoints:
+                    <ul>
+                        <li>Get all tickets: <code>/tickets/all</code></li>
+                        <li>Get tickets of specific status (open/close): <code>/tickets/?status=&lt;status&gt;</code>
+                        </li>
+                        <li>Get tickets with a specific title: <code>/tickets/?title=&lt;title&gt;</code></li>
+                        <li>Get tickets according to priority (high/medium/low):
+                            <code>/tickets/?priority=&lt;priority&gt;</code>
+                        </li>
+                    </ul>
+                </li>
+                <li>Request type: <code>GET</code></li>
+                <li>Return type: <code>tickets according to the specifications</code></li>
+            </ul>
+        </li>
+        <li>
+            <h4 id="closing-tickets">Closing Tickets</h4>
+            <ul>
+                <li>Endpoint: <code>/tickets/close</code></li>
+                <li>Request type: <code>POST</code></li>
+                <li>Body param: <code>ticket ID</code></li>
+                <li>Note:
+                    <ul>
+                        <li><code>auth token of the user assigned to the ticket can only close the ticket or the admin.</code>
+                        </li>
+                        <li><code>ticket cannot be closed if another higher priority ticket has been assigned to the same user, returning and error and all tasks of a higher priority.</code>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h4 id="deleting-tickets">Deleting Tickets</h4>
+            <ul>
+                <li>Endpoint: <code>/tickets/delete</code></li>
+                <li>Request type: <code>POST</code></li>
+                <li>Body param: <code>ticket ID</code></li>
+                <li>Note: <code>only admins can delete tickets</code></li>
+            </ul>
+        </li>
+    </ul>
+</body>
+
+</html>
