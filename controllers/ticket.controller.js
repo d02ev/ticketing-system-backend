@@ -1,7 +1,6 @@
 const JWT = require('jsonwebtoken');
 const Bcrypt = require('bcryptjs');
 const TicketService = require('../services/TicketService');
-const TicketModel = require('../models/TicketSchema');
 
 module.exports = class Ticket {
     static async apiCreateTicket(req, res, next) {

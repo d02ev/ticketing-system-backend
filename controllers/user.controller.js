@@ -1,4 +1,4 @@
-const Bcrypt = require('bcryptjs');
+const JWT = require('jsonwebtoken');
 const UserService = require('../services/UserService');
 const UserModel = require('../models/UserSchema');
 
@@ -8,14 +8,19 @@ module.exports = class User {
         const existing_user = await UserModel.findOne({ username: req.body.username });
         if (existing_user) return res.status(400).send('User Already Exists');
 
-        // hashing passwords before saving to DB
-        const pass_salt = await Bcrypt.genSalt(10);
-        const pass_hash = await Bcrypt.hash(req.body.username, pass_salt);
+        // creating an auth-token for the user
+        const auth_token = JWT.sign({
+            username: req.body.username
+        }, 
+        process.env.JWT_TOKEN,
+        {
+            expiresIn: "1h"
+        });
 
         const creation_data = new UserModel({
             username: req.body.username,
             role: req.body.role,
-            auth_token: pass_hash
+            auth_token: auth_token
         });
 
         try {
