@@ -5,7 +5,8 @@ module.exports = class UserService {
         try {
             const new_user = {
                 username: creationData.username,
-                role: creationData.role
+                role: creationData.role,
+                auth_token: creationData.auth_token
             }
 
             const response = await new UserModel(new_user).save();

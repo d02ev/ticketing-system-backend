@@ -38,10 +38,10 @@ module.exports = class TicketService {
         }
     }
 
-    static async getTicketByTitle(title) {
+    static async getTicketsByTitle(title) {
         try {
-            const ticket_by_title = await TicketModel.findOne({ title: title });
-            return ticket_by_title;
+            const tickets_by_title = await TicketModel.find({ title: title });
+            return tickets_by_title;
         }
         catch (error) {
             console.error(error);

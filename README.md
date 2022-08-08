@@ -22,7 +22,7 @@ This project works the similar way but instead of creating a full-fledged ticket
 
 - #### User Registration
 
-  - Endpoint: ```/users/new```
+  - Endpoint: ```/api/v1/users/new```
   - Request type: ```POST```
   - Body params:
     - ```username```
@@ -31,7 +31,7 @@ This project works the similar way but instead of creating a full-fledged ticket
 
 - #### Raising a Ticket
 
-  - Endpoint: ```/tickets/new```
+  - Endpoint: ```/api/v1/tickets/new```
   - Request type: ```POST```
   - Body Params:
     - ```title```
@@ -42,16 +42,16 @@ This project works the similar way but instead of creating a full-fledged ticket
 - #### Get Ticket Details
 
   - Endpoints:
-    - Get all tickets: ```/tickets/all```
-    - Get tickets of specific status (open/close): ```/tickets/?status=<status>```
-    - Get tickets with a specific title: ```/tickets/?title=<title>```
-    - Get tickets according to priority (high/medium/low): ```/tickets/?priority=<priority>```
+    - Get all tickets: ```/api/v1/tickets/all```
+    - Get tickets of specific status (open/close): ```/api/v1/tickets/bystatus?status=<status>```
+    - Get tickets with a specific title: ```/api/v1/tickets/bytitle?title=<title>```
+    - Get tickets according to priority (high/medium/low): ```/api/v1/tickets/bypriority?priority=<priority>```
   - Request type: ```GET```
   - Return type: ```tickets according to the specifications```
 
 - #### Closing Tickets
 
-  - Endpoint: ```/tickets/close```
+  - Endpoint: ```/api/v1/tickets/close```
   - Request type: ```POST```
   - Body param: ```ticket ID```
   - Note:
@@ -60,7 +60,7 @@ This project works the similar way but instead of creating a full-fledged ticket
 
 - #### Deleting Tickets
 
-  - Endpoint: ```/tickets/delete```
+  - Endpoint: ```/api/v1/tickets/delete```
   - Request type: ```POST```
   - Body param: ```ticket ID```
   - Note: ```only admins can delete tickets```

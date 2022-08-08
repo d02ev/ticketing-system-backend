@@ -1,6 +1,8 @@
 const Express = require('express');
 const BodyParser = require('body-parser');
 const Path = require('path');
+const UserRoute = require('./routes/user.routes');
+const TicketRoute = require('./routes/ticket.routes');
 require('dotenv/config');
 require('./config/db').connectDB(); // database connection
 
@@ -14,6 +16,13 @@ App.use(BodyParser.urlencoded(
     }
 ));
 App.use(BodyParser.json());
+
+// routes
+App.use('/api/v1/user/new', UserRoute);    // user creation route
+
+App.use('/api/v1/ticket/new', TicketRoute);    // ticket creation route
+App.use('/api/v1/tickets/all', TicketRoute); // get all tickets from db
+App.use('/api/v1/tickets', TicketRoute); // get tickets by status, title or priority
 
 // home page
 App.get('/', (req, res) => {
