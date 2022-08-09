@@ -1,5 +1,3 @@
-const JWT = require('jsonwebtoken');
-const Bcrypt = require('bcryptjs');
 const TicketService = require('../services/TicketService');
 
 module.exports = class Ticket {
@@ -63,5 +61,40 @@ module.exports = class Ticket {
                 error: error
             });
         }
+    }
+
+    static async apiCloseTicket(req, res, next) {
+        try {
+            const ticket_by_id = await TicketService.getTicketByID(req.body.ticket_id);
+
+            // ticket cannot be closed if higher priority tickets already exist for the user
+            const user_assigned = ticket_by_id.assigned_to;
+            const ticket_priority_user_assigned_to = ticket_by_id.priority;
+
+            // find all tickets assigned to the user and their priorities
+            const tickets_by_user = await TicketService.getTicketsByUser(user_assigned);
+
+            tickets_by_user.forEach(ticket => {
+                if (ticket_priority_user_assigned_to === 'low' && (ticket.priority === 'high' || ticket.priority === 'medium')) {
+                    res.status(403).send('Higher Priority Ticket(s) Remain(s) To Be Closed');
+                    res.json(ticket);
+                }
+                if (ticket_priority_user_assigned_to === 'medium' && ticket.priority === 'high') {
+                    res.status(403).send('A Higher Priority Ticket(s) Remain(s) To Be Closed');
+                    res.json(ticket);
+                }
+            });
+
+            res.status(200).send(`Ticket #${req.body.ticket_id} Has Been Successfully Closed!`);
+        }
+        catch (error) {
+            res.json({
+                error: error
+            });
+        }
+    }
+
+    static async apiDeleteTicket(req, res, next) {
+
     }
 }

@@ -10,11 +10,11 @@ const verifyToken = (req, res, next) => {
 
     // if token is present in the header
     try {
-        const decode_token = JWT.verify(auth_token, process.env.JWT_TOKEN);
-        req.new_user = decode_token;
+        const decode_token = JWT.verify(auth_token, process.env.ADMIN_TOKEN);
+        req.new_ticket = decode_token;
     }
     catch (error) {
-        return res.status(401).send("Invalid Token Cannot Perform Action!");
+        return res.status(401).send("You Are Not Authorised for the Action!");
     }
 
     return next();

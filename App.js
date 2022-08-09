@@ -18,11 +18,10 @@ App.use(BodyParser.urlencoded(
 App.use(BodyParser.json());
 
 // routes
-App.use('/api/v1/user/new', UserRoute);    // user creation route
+App.use('/api/v1/user', UserRoute); // create a new user
 
-App.use('/api/v1/ticket/new', TicketRoute);    // ticket creation route
-App.use('/api/v1/tickets/all', TicketRoute); // get all tickets from db
-App.use('/api/v1/tickets', TicketRoute); // get tickets by status, title or priority
+App.use('/api/v1/ticket', TicketRoute); // create, close and delete a ticket
+App.use('/api/v1/tickets', TicketRoute);    // get all tickets, tickets with status, priority and title
 
 // home page
 App.get('/', (req, res) => {

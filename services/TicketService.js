@@ -28,6 +28,26 @@ module.exports = class TicketService {
         }
     }
 
+    static async getTicketByID(ticketID) {
+        try {
+            const ticket_by_id = await TicketModel.findById(ticketID);
+            return ticket_by_id;
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+
+    static async getTicketsByUser(user) {
+        try {
+            const tickets_by_user = await TicketModel.find({ assigned_to: user });
+            return tickets_by_user;
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+
     static async getTicketsByStatus(status) {
         try {
             const tickets_by_status = await TicketModel.find({ status: status });
