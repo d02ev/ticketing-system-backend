@@ -1,3 +1,4 @@
+const JWT = require('jsonwebtoken');
 const TicketService = require('../services/TicketService');
 
 module.exports = class Ticket {
@@ -85,7 +86,8 @@ module.exports = class Ticket {
                 }
             });
 
-            res.status(200).send(`Ticket #${req.body.ticket_id} Has Been Successfully Closed!`);
+            await TicketService.closeTicket(req.body.ticket_id);
+            res.status(200).send(`Ticket #${req.body.ticket_id} Has Been Successfully Closed!`); 
         }
         catch (error) {
             res.json({

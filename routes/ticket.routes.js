@@ -9,7 +9,7 @@ Route.get('/all', TicketController.apiGetAllTickets);
 Route.get('/bystatus', TicketController.apiGetTicketsByStatus);
 Route.get('/bytitle', TicketController.apiGetTicketsByTitle);
 Route.get('/bypriority', TicketController.apiGetTicketsByPriority);
-Route.post('/close', CloseTicketAuth, TicketController.apiCloseTicket);
+Route.post('/close', TicketController.apiCloseTicket);
 Route.post('/delete', DeleteTicketAuth, TicketController.apiDeleteTicket);
 
 module.exports = Route;
