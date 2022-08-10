@@ -1,5 +1,6 @@
 const JWT = require('jsonwebtoken');
 const TicketService = require('../services/TicketService');
+const UserService = require('../services/UserService');
 
 module.exports = class Ticket {
     static async apiCreateTicket(req, res, next) {
@@ -71,6 +72,28 @@ module.exports = class Ticket {
             // ticket cannot be closed if higher priority tickets already exist for the user
             const user_assigned = ticket_by_id.assigned_to;
             const ticket_priority_user_assigned_to = ticket_by_id.priority;
+
+            // creating signatures according to the role of the user
+            const user_by_name = await UserService.getUserByName(user_assigned);
+            const user_role = user_by_name.role;
+            let auth_token;
+
+            if (user_role === 'admin') {
+                auth_token = JWT.sign(
+                    {
+                        username: user_by_name.username 
+                    },
+                    process.env.ADMIN_TOKEN
+                );
+            }
+            if (user_role === 'employee') {
+                auth_token = JWT.sign(
+                    {
+                        username: user_by_name.username
+                    },
+                    process.env.EMP_TOKEN
+                );
+            }
 
             // find all tickets assigned to the user and their priorities
             const tickets_by_user = await TicketService.getTicketsByUser(user_assigned);

@@ -1,5 +1,6 @@
 const TicketModel = require('../models/TicketSchema');
 
+
 module.exports = class TicketService {
     static async createTicket(creationData) {
         try {

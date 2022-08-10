@@ -16,4 +16,14 @@ module.exports = class UserService {
             console.error(error);
         }
     }
+
+    static async getUserByName(userName) {
+        try {
+            const user_by_name = await UserModel.find({ username: userName });
+            return user_by_name;
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
 }
