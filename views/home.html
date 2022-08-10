@@ -15,7 +15,7 @@
         <li>
             <h4 id="user-registration">User Registration</h4>
             <ul>
-                <li>Endpoint: <code>/users/new</code></li>
+                <li>Endpoint: <code>/api/v1/users/new</code></li>
                 <li>Request type: <code>POST</code></li>
                 <li>Body params:
                     <ul>
@@ -29,7 +29,7 @@
         <li>
             <h4 id="raising-a-ticket">Raising a Ticket</h4>
             <ul>
-                <li>Endpoint: <code>/tickets/new</code></li>
+                <li>Endpoint: <code>/api/v1/tickets/new</code></li>
                 <li>Request type: <code>POST</code></li>
                 <li>Body Params:
                     <ul>
@@ -46,12 +46,12 @@
             <ul>
                 <li>Endpoints:
                     <ul>
-                        <li>Get all tickets: <code>/tickets/all</code></li>
-                        <li>Get tickets of specific status (open/close): <code>/tickets/?status=&lt;status&gt;</code>
+                        <li>Get all tickets: <code>/api/v1/tickets/all</code></li>
+                        <li>Get tickets of specific status (open/close): <code>/api/v1/tickets/?status=&lt;status&gt;</code>
                         </li>
-                        <li>Get tickets with a specific title: <code>/tickets/?title=&lt;title&gt;</code></li>
+                        <li>Get tickets with a specific title: <code>/api/v1/tickets/?title=&lt;title&gt;</code></li>
                         <li>Get tickets according to priority (high/medium/low):
-                            <code>/tickets/?priority=&lt;priority&gt;</code>
+                            <code>/api/v1/tickets/?priority=&lt;priority&gt;</code>
                         </li>
                     </ul>
                 </li>
@@ -62,7 +62,7 @@
         <li>
             <h4 id="closing-tickets">Closing Tickets</h4>
             <ul>
-                <li>Endpoint: <code>/tickets/close</code></li>
+                <li>Endpoint: <code>/api/v1/tickets/close</code></li>
                 <li>Request type: <code>POST</code></li>
                 <li>Body param: <code>ticket ID</code></li>
                 <li>Note:
@@ -78,7 +78,7 @@
         <li>
             <h4 id="deleting-tickets">Deleting Tickets</h4>
             <ul>
-                <li>Endpoint: <code>/tickets/delete</code></li>
+                <li>Endpoint: <code>/api/v1/tickets/delete</code></li>
                 <li>Request type: <code>POST</code></li>
                 <li>Body param: <code>ticket ID</code></li>
                 <li>Note: <code>only admins can delete tickets</code></li>
