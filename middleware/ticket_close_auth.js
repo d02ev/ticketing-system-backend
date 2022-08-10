@@ -1,7 +1,7 @@
 const JWT = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
-    const auth_token = req.headers["x-access-token"];
+    const auth_token = req.headers['x-access-token'];
 
     // if the token is not present in the header
     if (!auth_token) {
