@@ -4,7 +4,7 @@
   "description": "a basic ticketing system backend service",
   "main": "App.js",
   "scripts": {
-    "start": "node App.js",
+    "start": "node .",
     "devStart": "nodemon App.js"
   },
   "repository": {
