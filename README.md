@@ -9,7 +9,7 @@
   - [Get Ticket Details](#get-ticket-details)
   - [Closing Tickets](#closing-tickets)
   - [Deleting Tickets](#deleting-tickets)
-- [Tech Stack Used](#tech-stack-used)
+- [Tech Used](#tech-used)
 - [Live URL](#live-URL)
 
 ### Introduction
@@ -65,10 +65,13 @@ This project works the similar way but instead of creating a full-fledged ticket
   - Body param: ```ticket ID```
   - Note: ```only admins can delete tickets```
 
-### Tech Stack Used
+### Tech Used
 
 - [NodeJS](https://www.nodejs.org/)
 - [ExpressJS](https://www.expressjs.com)
 - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/efficiency?adgroup=115749713423)
+- [Mongoose](https://mongoosejs.com/)
+- [JWT](https://jwt.io)
+- [Nodemon](https://www.npmjs.com/package/nodemon)
 
 ### Live URL
