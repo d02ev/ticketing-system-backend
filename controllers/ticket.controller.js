@@ -81,7 +81,7 @@ module.exports = class Ticket {
             if (user_role === 'admin') {
                 auth_token = JWT.sign(
                     {
-                        ticket_id: req.body.ticket_id,
+                        username: ticket_by_id.assigned_to,
                         role: 'admin'
                     },
                     process.env.ADMIN_TOKEN
@@ -90,7 +90,7 @@ module.exports = class Ticket {
             if (user_role === 'employee') {
                 auth_token = JWT.sign(
                     {
-                        ticket_id: req.body.ticket_id,
+                        username: ticket_by_id.assigned_to,
                         role: 'employee'
                     },
                     process.env.EMP_TOKEN
