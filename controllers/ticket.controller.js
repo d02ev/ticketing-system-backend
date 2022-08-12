@@ -84,7 +84,7 @@ module.exports = class Ticket {
                         username: ticket_by_id.assigned_to,
                         role: 'admin'
                     },
-                    process.env.ADMIN_TOKEN
+                    process.env.ADMIN_TOKEN_TC
                 );
             }
             if (user_role === 'employee') {
@@ -93,7 +93,7 @@ module.exports = class Ticket {
                         username: ticket_by_id.assigned_to,
                         role: 'employee'
                     },
-                    process.env.EMP_TOKEN
+                    process.env.EMP_TOKEN_TC
                 );
             }
 
