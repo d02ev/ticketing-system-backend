@@ -1,6 +1,5 @@
 const JWT = require('jsonwebtoken');
 const TicketService = require('../services/TicketService');
-const UserService = require('../services/UserService');
 
 module.exports = class Ticket {
     static async apiCreateTicket(req, res, next) {
@@ -67,50 +66,42 @@ module.exports = class Ticket {
 
     static async apiCloseTicket(req, res, next) {
         try {
+            // access the ticket queried through it's provided ID
             const ticket_by_id = await TicketService.getTicketByID(req.body.ticket_id);
 
-            // ticket cannot be closed if higher priority tickets already exist for the user
+            // access the user the ticket is assigned to
             const user_assigned = ticket_by_id.assigned_to;
-            const ticket_priority_user_assigned_to = ticket_by_id.priority;
 
-            // creating signatures according to the role of the user
-            const user_by_name = await UserService.getUserByName(user_assigned);
-            const user_role = user_by_name.role;
-            let auth_token;
+            // access the priority of the queried ticket
+            const ticket_priority = ticket_by_id.priority;
 
-            if (user_role === 'admin') {
-                auth_token = JWT.sign(
-                    {
-                        username: ticket_by_id.assigned_to,
-                        role: 'admin'
-                    },
-                    process.env.ADMIN_TOKEN_TC
-                );
-            }
-            if (user_role === 'employee') {
-                auth_token = JWT.sign(
-                    {
-                        username: ticket_by_id.assigned_to,
-                        role: 'employee'
-                    },
-                    process.env.EMP_TOKEN_TC
-                );
-            }
+            // since admin has universal privileges, therefore there's only need to create a signature
+            // for the employee the ticket is assigned to so that no other employee can close the ticket
+            const close_auth_token = JWT.sign(
+                {
+                    username: user_assigned,
+                    role: 'employee'
+                },
+                process.env.CLOSING_TICKET_TOKEN    // this token is different from other employee token, but has same payload  
+            );
 
-            // find all tickets assigned to the user and their priorities
+            // find all tickets assigned to the user
             const tickets_by_user = await TicketService.getTicketsByUser(user_assigned);
+            let priority_counter = 0;
 
             tickets_by_user.forEach(ticket => {
-                if (ticket_priority_user_assigned_to === 'low' && (ticket.priority === 'high' || ticket.priority === 'medium')) {
-                    res.status(403).send('Higher Priority Ticket(s) Remain(s) To Be Closed').json(ticket);
-                }
-                if (ticket_priority_user_assigned_to === 'medium' && ticket.priority === 'high') {
-                    res.status(403).send('A Higher Priority Ticket(s) Remain(s) To Be Closed').json(ticket);
+                if ((ticket_priority === 'low' && (ticket.priority === 'medium' || ticket.priority === 'high')) || (ticket_priority === 'medium' && ticket.priority === 'high')) {
+                    ++priority_counter;
                 }
             });
 
-            await TicketService.closeTicket(req.body.ticket_id);
-            res.status(200).send(`Ticket #${req.body.ticket_id} Has Been Successfully Closed!`); 
+            if (priority_counter > 0) {
+                res.status(403).send('High Priority Tickets Need To Be Closed First!');
+            }
+            else {
+                await TicketService.closeTicket(req.body.ticket_id);
+                res.status(200).send(`Ticket #${req.body.ticket_id} Has Been Successfully Closed!`);
+            }
         }
         catch (error) {
             res.json({
