@@ -9,8 +9,8 @@ const verifyToken = (req, res, next) => {
     }
 
     try {
-        const decode_token = JWT.verify(auth_token, process.env.ADMIN_TOKEN) || JWT.verify(auth_token, process.env.EMP_TOKEN);
-        req.closing_ticket = decode_token;
+        const decoded_payload = JWT.verify(auth_token, process.env.ADMIN_TOKEN) || JWT.verify(auth_token, process.env.EMP_TOKEN);
+        req.closing_ticket = decoded_payload;
     }
     catch (error) {
         return res.status(401).send('You Are Not Authorised for the Action!');

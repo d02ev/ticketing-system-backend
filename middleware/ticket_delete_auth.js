@@ -11,7 +11,7 @@ const verifyToken = (req, res, next) => {
     // if token is present in the header
     try {
         const decode_token = JWT.verify(auth_token, process.env.ADMIN_TOKEN);
-        req.new_ticket = decode_token;
+        req.deleting_ticket = decode_token;
     }
     catch (error) {
         return res.status(401).send("You Are Not Authorised for the Action!");

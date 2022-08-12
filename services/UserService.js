@@ -19,7 +19,7 @@ module.exports = class UserService {
 
     static async getUserByName(userName) {
         try {
-            const user_by_name = await UserModel.find({ username: userName });
+            const user_by_name = await UserModel.findOne({ username: userName });
             return user_by_name;
         }
         catch (error) {

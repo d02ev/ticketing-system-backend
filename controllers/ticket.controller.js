@@ -81,7 +81,8 @@ module.exports = class Ticket {
             if (user_role === 'admin') {
                 auth_token = JWT.sign(
                     {
-                        username: user_by_name.username 
+                        ticket_id: req.body.ticket_id,
+                        role: 'admin'
                     },
                     process.env.ADMIN_TOKEN
                 );
@@ -89,7 +90,8 @@ module.exports = class Ticket {
             if (user_role === 'employee') {
                 auth_token = JWT.sign(
                     {
-                        username: user_by_name.username
+                        ticket_id: req.body.ticket_id,
+                        role: 'employee'
                     },
                     process.env.EMP_TOKEN
                 );
@@ -100,12 +102,10 @@ module.exports = class Ticket {
 
             tickets_by_user.forEach(ticket => {
                 if (ticket_priority_user_assigned_to === 'low' && (ticket.priority === 'high' || ticket.priority === 'medium')) {
-                    res.status(403).send('Higher Priority Ticket(s) Remain(s) To Be Closed');
-                    res.json(ticket);
+                    res.status(403).send('Higher Priority Ticket(s) Remain(s) To Be Closed').json(ticket);
                 }
                 if (ticket_priority_user_assigned_to === 'medium' && ticket.priority === 'high') {
-                    res.status(403).send('A Higher Priority Ticket(s) Remain(s) To Be Closed');
-                    res.json(ticket);
+                    res.status(403).send('A Higher Priority Ticket(s) Remain(s) To Be Closed').json(ticket);
                 }
             });
 
@@ -120,6 +120,14 @@ module.exports = class Ticket {
     }
 
     static async apiDeleteTicket(req, res, next) {
-
+        try {
+            await TicketService.deleteTicket(req.body.ticket_id);
+            res.status(200).send(`Ticket #${req.body.ticket_id} Has Been Successfully Deleted!`);
+        }
+        catch (error) {
+            res.json({
+                error: error
+            })
+        }
     }
 }

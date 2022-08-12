@@ -22,7 +22,7 @@ This project works the similar way but instead of creating a full-fledged ticket
 
 - #### User Registration
 
-  - Endpoint: ```/api/v1/users/new```
+  - Endpoint: ```/api/v1/user/new```
   - Request type: ```POST```
   - Body params:
     - ```username```
