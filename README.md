@@ -3,12 +3,13 @@
 ## Content
 
 - [Introduction](#introduction)
-- [Details](#details)
+- [API Endpoints](#api-endpoints)
   - [User Registration](#user-registration)
   - [Raising A Ticket](#raising-a-ticket)
   - [Get Ticket Details](#get-ticket-details)
   - [Closing Tickets](#closing-tickets)
   - [Deleting Tickets](#deleting-tickets)
+- [Environment File Configuration](#environment-file-configuration)
 - [Tech Used](#tech-used)
 - [Live URL](#live-URL)
 
@@ -18,7 +19,7 @@ A ticketing system is a management tool that processes and catalogs customer ser
 
 This project works the similar way but instead of creating a full-fledged ticketing system, I'll be working mainly upon the backend.
 
-### Details
+### API Endpoints
 
 - #### User Registration
 
@@ -64,6 +65,14 @@ This project works the similar way but instead of creating a full-fledged ticket
   - Request type: ```POST```
   - Body param: ```ticket ID```
   - Note: ```only admins can delete tickets```
+
+### Environment File Configuration
+
+- NODE_ENV => Name of the node environment.
+- PORT => Port number for the server to listen to.
+- DB_URI => Database connection string for mongo db.
+- ADMIN_TOKEN => JWT token for admin.
+- EMP_TOKEN => JWT token for employee.
 
 ### Tech Used
 
