@@ -23,6 +23,9 @@ const ticket_schema = new Mongoose.Schema({
         type: Date,
         default: Date.now
     }
+}, 
+{
+    collection: 'tickets'
 });
 
-module.exports = Mongoose.model("TicketSchema", ticket_schema);
+module.exports = Mongoose.model("TicketModel", ticket_schema);
