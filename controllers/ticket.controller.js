@@ -75,22 +75,12 @@ module.exports = class Ticket {
             // access the priority of the queried ticket
             const ticket_priority = ticket_by_id.priority;
 
-            // since admin has universal privileges, therefore there's only need to create a signature
-            // for the employee the ticket is assigned to so that no other employee can close the ticket
-            const close_auth_token = JWT.sign(
-                {
-                    username: user_assigned,
-                    role: 'employee'
-                },
-                process.env.CLOSING_TICKET_TOKEN    // this token is different from other employee token, but has same payload  
-            );
-
             // find all tickets assigned to the user
             const tickets_by_user = await TicketService.getTicketsByUser(user_assigned);
             let priority_counter = 0;
 
             tickets_by_user.forEach(ticket => {
-                if ((ticket_priority === 'low' && (ticket.priority === 'medium' || ticket.priority === 'high')) || (ticket_priority === 'medium' && ticket.priority === 'high')) {
+                if (((ticket_priority === 'low' && (ticket.priority === 'medium' || ticket.priority === 'high')) || (ticket_priority === 'medium' && ticket.priority === 'high')) && ticket.status === 'open') {
                     ++priority_counter;
                 }
             });

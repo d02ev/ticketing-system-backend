@@ -19,7 +19,6 @@ App.use(BodyParser.json());
 
 // routes
 App.use('/api/v1/user', UserRoute); // create a new user
-
 App.use('/api/v1/ticket', TicketRoute); // create, close and delete a ticket
 App.use('/api/v1/tickets', TicketRoute);    // get all tickets, tickets with status, priority and title
 

@@ -7,7 +7,7 @@ module.exports = class User {
         try {
             // checks if user already exists in the database
             const existing_user = await UserModel.findOne({ username: req.body.username });
-            if (existing_user) return res.status(400).send('User Already Exists');
+            if (existing_user) return res.status(400).send('User Already Exists!');
 
             // creating signatures according to the role of the user
             // if the user is registering as an admin
