@@ -6,7 +6,7 @@ const verifyToken = async (req, res, next) => {
 
     // if the token is not present in the header
     if (!auth_token) {
-        return res.status(403).send('An Auth Token is Required for the Action');
+        return res.status(403).send('An Auth Token is Required For The Action');
     }
 
     try {
@@ -14,14 +14,14 @@ const verifyToken = async (req, res, next) => {
         const requested_ticket = await TicketService.getTicketByID(req.body.ticket_id);
 
         if (requested_ticket.assigned_to === decoded_payload.username) {
-            req.closing_ticket = decoded_payload;
+            req.closing_ticket = true;
         }
         else {
-            throw new Error('You are Not Authorised for the Action');
+            return res.status(401).send('You Are Not Authorised For The Action!');
         }
     }
     catch (error) {
-        return res.status(401).send('You Are Not Authorised for the Action!');
+        req.closing_ticket = true;
     }
 
     return next();
