@@ -8,7 +8,6 @@ require('./config/db.config').connectDB(); // database connection
 
 const App = Express();
 
-// body-parser config
 App.use(Express.json());
 App.use(BodyParser.urlencoded(
     {
