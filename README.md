@@ -11,6 +11,7 @@
   - [Deleting Tickets](#deleting-tickets)
 - [Environment File Configuration](#environment-file-configuration)
 - [Tech Used](#tech-used)
+- [Resources](#resources)
 - [Live URL](#live-URL)
 
 ### Introduction
@@ -38,7 +39,7 @@ This project works the similar way but instead of creating a full-fledged ticket
     - ```title```
     - ```description```
   - Return type: ```ticket ID```
-  - Note: ```ticket can only be raised if the auth token is of an admin```
+  - Note: **ticket can only be raised if the auth token is of an admin**
 
 - #### Get Ticket Details
 
@@ -56,23 +57,23 @@ This project works the similar way but instead of creating a full-fledged ticket
   - Request type: ```POST```
   - Body param: ```ticket ID```
   - Note:
-    - ```auth token of the user assigned to the ticket can only close the ticket or the admin.```
-    - ```ticket cannot be closed if another higher priority ticket has been assigned to the same user, returning and error and all tasks of a higher priority.```
+    - **auth token of the user assigned to the ticket can only close the ticket or the admin.**
+    - **ticket cannot be closed if another higher priority ticket has been assigned to the same user, returning and error and all tasks of a higher priority.**
 
 - #### Deleting Tickets
 
   - Endpoint: ```/api/v1/tickets/delete```
   - Request type: ```POST```
   - Body param: ```ticket ID```
-  - Note: ```only admins can delete tickets```
+  - Note: **only admins can delete tickets**
 
 ### Environment File Configuration
 
-- NODE_ENV => Name of the node environment.
-- PORT => Port number for the server to listen to.
-- DB_URI => Database connection string for mongo db.
-- ADMIN_TOKEN => JWT token for admin.
-- EMP_TOKEN => JWT token for employee.
+- ```NODE_ENV``` - Name of the node environment.
+- ```PORT``` - Port number for the server to listen to.
+- ```DB_URI``` - Database connection string for mongo db.
+- ```ADMIN_TOKEN``` - JWT token signature string for admin.
+- ```EMP_TOKEN``` - JWT token signature string for employee.
 
 ### Tech Used
 
@@ -82,5 +83,12 @@ This project works the similar way but instead of creating a full-fledged ticket
 - [Mongoose](https://mongoosejs.com/)
 - [JWT](https://jwt.io)
 - [Nodemon](https://www.npmjs.com/package/nodemon)
+
+### Resources
+
+- [Web Dev Simplified's Video on Express Middlewares](https://www.youtube.com/watch?v=lY6icfhap2o)
+- [GeeksForGeeks' Article on Skipping a Middleware](https://www.geeksforgeeks.org/how-to-skip-a-middleware-in-express-js/)
+- [Idris Olubisi's Article on Building An Authentication API with JWT Token](https://www.section.io/engineering-education/how-to-build-authentication-api-with-jwt-token-in-nodejs/)
+- [Emmanuel Etukudo's Article on Understanding MVC Pattern in NodeJS](https://dev.to/eetukudo_/understanding-mvc-pattern-in-nodejs-2bdn)
 
 ### Live URL
