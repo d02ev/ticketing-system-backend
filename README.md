@@ -12,7 +12,8 @@
 - [Environment File Configuration](#environment-file-configuration)
 - [Tech Used](#tech-used)
 - [Resources](#resources)
-- [Live URL](#live-URL)
+- [Project Running Instructrions](#project-running-instructions)
+- [Continued Development](#continued-development)
 
 ### Introduction
 
@@ -91,4 +92,20 @@ This project works the similar way but instead of creating a full-fledged ticket
 - [Idris Olubisi's Article on Building An Authentication API with JWT Token](https://www.section.io/engineering-education/how-to-build-authentication-api-with-jwt-token-in-nodejs/)
 - [Emmanuel Etukudo's Article on Understanding MVC Pattern in NodeJS](https://dev.to/eetukudo_/understanding-mvc-pattern-in-nodejs-2bdn)
 
-### Live URL
+### Project Running Instructions
+
+1. Clone or download the project.
+
+2. Create and configure the ```.env``` file with the given specifications in the root folder.
+
+3. Run ```npm install``` command from the root folder.
+
+4. To run the project use the command ```npm run devStart``` from the root folder. If the project configures itself properly you'll see ```Server is Listening at <PORT NUMBER>``` and ```Connected to DB Successfully!``` printed on the console.
+
+5. Use **Postman** or any other API testing tool to test the routes.
+
+### Continued Development
+
+1. Will be working upon building a frontend for the project using [ReactJS](https://reactjs.org/).
+
+2. Will also try to create a serverless backend for the project using [AWS](https://aws.amazon.com/).
